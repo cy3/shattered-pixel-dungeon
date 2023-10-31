@@ -62,6 +62,8 @@ import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMirrorImag
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfRage;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfMagicMissile;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfWish;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Gloves;
@@ -127,6 +129,18 @@ public enum HeroClass {
 			case DUELIST:
 				initDuelist( hero );
 				break;
+		}
+
+		if (DeviceCompat.isDebug()) {
+			// add wish wand for debug
+			Wand wand = new WandOfWish();
+			wand.identify();
+			for (int s= 0; s < 100; s++) {
+				wand.upgrade();
+			}
+			wand.maxCharges = 100;
+			wand.curCharges = 100;
+			wand.quantity(1).collect();
 		}
 
 		if (SPDSettings.quickslotWaterskin()) {
