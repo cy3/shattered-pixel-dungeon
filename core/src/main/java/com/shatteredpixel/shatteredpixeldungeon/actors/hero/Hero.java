@@ -124,6 +124,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfLivingEarth;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.gun.SG.SG;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Flail;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MeleeWeapon;
@@ -477,6 +478,9 @@ public class Hero extends Char {
 				accuracy *= 1.5f;
 			}
 		}
+		if (wep instanceof SG.SGBullet && !Dungeon.level.adjacent(pos, target.pos)) {
+			accuracy = 0;
+		}
 
 		if (buff(Scimitar.SwordDance.class) != null){
 			accuracy *= 1.25f;
@@ -657,6 +661,7 @@ public class Hero extends Char {
 		if (RingOfForce.fightingUnarmed(this))  return true;
 		if (STR() < ((Weapon)w).STRReq())       return false;
 		if (w instanceof Flail)                 return false;
+		if (w instanceof SG.SGBullet)           return false;
 
 		return super.canSurpriseAttack();
 	}
